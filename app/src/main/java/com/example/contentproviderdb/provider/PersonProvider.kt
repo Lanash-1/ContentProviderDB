@@ -9,17 +9,16 @@ import com.example.contentproviderdb.db.PersonDBHelper
 
 class PersonProvider: ContentProvider() {
 
-
     companion object {
-        val PROVIDER_NAME = "com.example.contentproviderdb.provider/PersonProvider"
-        val URL = "content://$PROVIDER_NAME/PERSON"
-        val CONTENT_URI = Uri.parse(URL)
-        val COLUMN_NAME = "NAME"
-        val COLUMN_PLACE = "PLACE"
-        val COLUMN_ID = "ID"
+        private const val PROVIDER_NAME = "com.example.contentproviderdb.provider/PersonProvider"
+        private const val URL = "content://$PROVIDER_NAME/PERSON"
+        val CONTENT_URI = Uri.parse(URL)!!
+        const val COLUMN_NAME = "NAME"
+        const val COLUMN_PLACE = "PLACE"
+        const val COLUMN_ID = "ID"
     }
 
-    lateinit var db: SQLiteDatabase
+    private lateinit var db: SQLiteDatabase
 
 
     override fun onCreate(): Boolean {
@@ -28,7 +27,7 @@ class PersonProvider: ContentProvider() {
         return true
     }
 
-    override fun insert(uri: Uri, cv: ContentValues?): Uri? {
+    override fun insert(uri: Uri, cv: ContentValues?): Uri {
         db.insert("PERSON", null, cv)
         context?.contentResolver?.notifyChange(uri, null)
         return uri
@@ -36,13 +35,13 @@ class PersonProvider: ContentProvider() {
 
 
     override fun update(uri: Uri, cv: ContentValues?, condition: String?, conditionValues: Array<out String>?): Int {
-        var count = db.update("PERSON", cv, condition, conditionValues)
+        val count = db.update("PERSON", cv, condition, conditionValues)
         context?.contentResolver?.notifyChange(uri, null)
         return count
     }
 
     override fun delete(uri: Uri, condition: String?, conditionValues: Array<out String>?): Int {
-        var count = db.delete("PERSON", condition, conditionValues)
+        val count = db.delete("PERSON", condition, conditionValues)
         context?.contentResolver?.notifyChange(uri, null)
         return count
     }
@@ -58,7 +57,7 @@ class PersonProvider: ContentProvider() {
         return db.query("PERSON", columns, condition, conditionValues, null, null, order)
     }
 
-    override fun getType(p0: Uri): String? {
+    override fun getType(p0: Uri): String {
         return "vnd.android.cursor.dir/vnd.example.PERSON"
     }
 }

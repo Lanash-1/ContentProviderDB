@@ -11,7 +11,7 @@ class PersonDBHelper(
     override fun onCreate(db: SQLiteDatabase?) {
         val createTable = "CREATE TABLE PERSON(ID INTEGER PRIMARY KEY, NAME TEXT NOT NULL, PLACE TEXT NOT NULL)"
         db?.execSQL(createTable)
-        db?.execSQL("INSERT INTO PERSON(NAME, PLACE) VALUES('lanash', 'chennai');")
+        db?.execSQL("INSERT INTO PERSON(NAME, PLACE) VALUES('lanash', 'chennai')")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
