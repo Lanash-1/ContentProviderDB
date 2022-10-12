@@ -6,11 +6,11 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.contentproviderdb.User
 
-val DATABASE_NAME = "Example.db"
-val TABLE_NAME = "User"
-val COL_NAME = "name"
-val COL_PLACE = "place"
-val COL_ID = "id"
+const val DATABASE_NAME = "Example.db"
+const val TABLE_NAME = "User"
+const val COL_NAME = "name"
+const val COL_PLACE = "place"
+const val COL_ID = "id"
 
 class ExampleDBHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, 1 ) {
 
@@ -25,7 +25,7 @@ class ExampleDBHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
 
     fun insertData(user : User){
         val db = this.writableDatabase
-        var cv = ContentValues()
+        val cv = ContentValues()
         cv.put(COL_NAME, user.name)
         cv.put(COL_PLACE, user.place)
         val result = db.insert(TABLE_NAME, null, cv)
